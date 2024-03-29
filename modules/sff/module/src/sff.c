@@ -68,6 +68,11 @@ sff_module_type_get(const uint8_t* eeprom)
 
     if (SFF8636_MODULE_QSFP28(eeprom)
         && SFF8636_MEDIA_EXTENDED(eeprom)
+        && SFF8636_MEDIA_100GE_DAC(eeprom))
+        return SFF_MODULE_TYPE_100G_DAC;
+
+    if (SFF8636_MODULE_QSFP28(eeprom)
+        && SFF8636_MEDIA_EXTENDED(eeprom)
         && SFF8636_MEDIA_100GE_AOC(eeprom))
         return SFF_MODULE_TYPE_100G_AOC;
 
@@ -347,6 +352,7 @@ sff_media_type_get(sff_module_type_t mt)
         case SFF_MODULE_TYPE_400G_BASE_LR8:
         case SFF_MODULE_TYPE_400G_LR4:
         case SFF_MODULE_TYPE_400G_BASE_DR4:
+        case SFF_MODULE_TYPE_100G_DAC:
         case SFF_MODULE_TYPE_100G_AOC:
         case SFF_MODULE_TYPE_100G_BASE_SR4:
         case SFF_MODULE_TYPE_100G_BASE_LR4:
@@ -406,6 +412,7 @@ sff_module_caps_get(sff_module_type_t mt, uint32_t *caps)
 
     switch(mt)
         {
+        case SFF_MODULE_TYPE_100G_DAC:
         case SFF_MODULE_TYPE_100G_AOC:
         case SFF_MODULE_TYPE_100G_BASE_SR4:
         case SFF_MODULE_TYPE_100G_BASE_LR4:
@@ -879,6 +886,7 @@ sff_info_init(sff_info_t* info, sff_module_type_t mt,
             info->caps = SFF_MODULE_CAPS_F_400G;
             break;
 
+        case SFF_MODULE_TYPE_100G_DAC:
         case SFF_MODULE_TYPE_100G_AOC:
         case SFF_MODULE_TYPE_100G_BASE_SR4:
         case SFF_MODULE_TYPE_100G_BASE_LR4:
