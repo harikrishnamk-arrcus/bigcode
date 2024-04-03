@@ -59,6 +59,9 @@ smf_module_type_get__(const uint8_t* eeprom)
         case SFF_CMIS_SMF_CODE_400G_LR4:
             return SFF_MODULE_TYPE_400G_LR4;
 
+        case SFF_CMIS_SMF_CODE_100G_LR:
+            return SFF_MODULE_TYPE_100G_BASE_LR;
+
         default:
             return SFF_MODULE_TYPE_INVALID;
         }
